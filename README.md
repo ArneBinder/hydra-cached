@@ -1,6 +1,8 @@
 # Hydra Cached
 Hydra instantiate, but cached!
 
+This project allows executing processing [pipelines](#pipelines) defined in python files. 
+
 ## Setup
 ```
 pip -r requirements.txt
@@ -44,3 +46,19 @@ optional arguments:
   --log_level LOG_LEVEL, -l LOG_LEVEL
                         Log level for the console logger. default: INFO
 ```
+
+
+## Pipelines
+
+A pipeline is defined in a Python module that contains at least one dict like object (default: `config`, see
+parameter `--config_object`) which may be arbitrary nested. The pipeline is executed by instantiating that config
+object, i.e. the config object is recursively processed by calling all values of keys `_target_` as functions with the
+remaining key value pairs as keyword arguments, see method `instantiate` in 
+[hydra.py](hydra_cached/execution/hydra.py) for further details and additional special keys. This functionality
+is provided by the [hydra package](https://hydra.cc/docs/intro/). However, the hydra instantiate method is slightly
+modified to allow for caching of intermediate results. By doing so, it is possible to reuse object definitions within
+one pipeline without the need to recalculate them. Per default, a simple 
+[in memory cache](hydra_cached/execution/caching/memory.py) is used that will not be persisted.
+
+Pipelines ar intended to work without external parameters, e.g. all input/output locations are defined within the config. 
+However, if necessary, you can use environment variables to parametrize the config.
