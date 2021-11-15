@@ -28,6 +28,7 @@ def instantiate(config: Any, *args: Any, cache: Optional[Union[Cache, str]] = No
     f"""
     This method is very similar to `hydra.utils.instantiate`, but allows to use a cache to
     avoid recalculation of items that are defined several times within a config.
+    See here for the original: https://github.com/facebookresearch/hydra/blob/v1.1.0/hydra/_internal/instantiate/_instantiate2.py#L114
     
     Per default, it uses a simple in memory cache `InMemoryCache`. 
     
