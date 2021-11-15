@@ -9,7 +9,7 @@ TK = TypeVar("TK")
 
 class Cache(Generic[TK, TV]):
     """
-    Cache interface that is required by `instantiate_with_cache`.
+    Cache interface that is required by `execution.hydra.instantiate`.
     """
 
     def __contains__(self, key: TK) -> bool:
