@@ -60,5 +60,5 @@ modified to allow for caching of intermediate results. By doing so, it is possib
 one pipeline without the need to recalculate them. Per default, a simple 
 [in memory cache](hydra_cached/execution/caching/memory.py) is used that will not be persisted.
 
-Pipelines ar intended to work without external parameters, e.g. all input/output locations are defined within the config. 
+Pipelines are intended to work without external parameters, e.g. all input/output locations are defined within the config. 
 However, if necessary, you can use environment variables to parametrize the config.
