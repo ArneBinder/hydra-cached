@@ -60,6 +60,12 @@ def main():
         default="INFO",
         help="Log level for the console logger. default: INFO"
     )
+    parser.add_argument(
+        "--time_min_persist", "-t",
+        type=int,
+        default=1000,
+        help="Minimum execution time in milliseconds a method hase to take to persist its result. default: 1000"
+    )
 
     args = parser.parse_args()
 
@@ -103,7 +109,7 @@ def main():
                 # function result when creating the key for the cache entries of results that depend on these.
                 not_deterministic_constraint,
                 # only dump entries whose execution time is at least 1 second
-                partial(exclude_target_time_none_or_lesser_then, min_time=timedelta(seconds=1))
+                partial(exclude_target_time_none_or_lesser_then, min_time=timedelta(milliseconds=args.time_min_persist))
             ])
 
 
