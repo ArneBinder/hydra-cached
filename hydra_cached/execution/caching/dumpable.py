@@ -87,7 +87,7 @@ class DumpableInMemoryCache(InMemoryCache[DictConfig, TV]):
             h = joblib.hash(k_dump)
             fn_config = path.join(directory, f'{h}.yaml')
             # To keep initial file creation timestamps, do not overwrite existing files.
-            if os.path.exists(fn_config) and not overwrite:
+            if path.exists(fn_config) and not overwrite:
                 if self.verbose:
                     logger.info(f'do not dump cache entry because it already exists: {h} (set overwrite=True to '
                                 f'enforce overwrite)')
