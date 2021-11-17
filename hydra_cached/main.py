@@ -8,7 +8,7 @@ from omegaconf import DictConfig
 
 logger = logging.getLogger(__name__)
 
-if __name__ == "__main__":
+def main():
 
     parser = argparse.ArgumentParser(description="Execute a processing pipeline from a config object defined in a "
                                                  "python module.")
@@ -107,3 +107,5 @@ if __name__ == "__main__":
             ])
 
 
+if __name__ == "__main__":
+    main()
