@@ -15,7 +15,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="hydra-cached",
-    version="0.0a1",
+    version="1.0rc1",
     description="Hydra instantiate, but cached!",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
