@@ -47,7 +47,7 @@ optional arguments:
                         Log level for the console logger. default: INFO
 ```
 
-Yoiu can find a working example config in [this repo](https://github.com/ArneBinder/hydra-cached-example).
+You can find a working example config in [this repo](https://github.com/ArneBinder/hydra-cached-example).
 
 
 ## Pipelines
