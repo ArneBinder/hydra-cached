@@ -85,8 +85,7 @@ def main():
         logger.info(f'config to instantiate:\n{config_to_yaml(config)}')
 
     if args.persist_cache:
-        logger.warning("USE A DUMPABLE CACHE (i.e. load an already dumped cache, if available, and dump it after "
-                       "execution). THIS IS EXPERIMENTAL!")
+        logger.info(f"enable cache persistence (loading from and dumping to cache directory={args.cache_dir})")
         cache = DumpableInMemoryCache[InstantiatedNode](directory=args.cache_dir, verbose=args.cache_verbose)
     else:
         # Use an in memory cache to avoid recalculation of re-occurring parts of the config
