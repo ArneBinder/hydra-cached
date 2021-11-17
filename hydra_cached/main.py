@@ -1,7 +1,7 @@
 import argparse
 import importlib
 import logging
-from datetime import timedelta
+from datetime import timedelta, datetime
 from functools import partial
 
 from omegaconf import DictConfig
@@ -94,8 +94,9 @@ def main():
 
     # put into try/finally to dump all partial results that were calculated so far if an exception occurs
     try:
+        t_start = datetime.now()
         result = instantiate(config=config, _convert_='partial', cache=cache)
-        print("instantiation done")
+        logger.info(f"instantiation done. total execution time: {datetime.now() - t_start}")
     finally:
         if isinstance(cache, DumpableInMemoryCache):
             cache.dump(constraints=[
