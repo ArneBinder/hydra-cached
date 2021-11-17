@@ -2,10 +2,12 @@
 Hydra instantiate, but cached!
 
 This project allows executing processing [pipelines](#pipelines) defined in python 
-files and which should follow the 
-[Hydra instantiate API](https://hydra.cc/docs/advanced/instantiate_objects/overview). 
+files which should follow the 
+[Hydra instantiate API](https://hydra.cc/docs/advanced/instantiate_objects/overview) 
+(plus some additions). 
 However, the result of all executed targets is cached in memory (can be disabled per 
-subconfig) and optionally persisted to or loaded from the file system. 
+subconfig) and optionally persisted to or loaded from the file system. The (sub-)configs are used as keys for the cache.
+Furthermore, methods that are not deterministic can be annotated with the `@not_deterministic` decorator. This will cause to re-execute these targets even if they were already executed before (and the cache was persisted). But when the hash of that new execution result matches a previously calculated one follow up calculation may be skipped.
 
 ## Setup
 ```
@@ -60,7 +62,7 @@ A pipeline is defined in a Python module that contains at least one dict like ob
 parameter `--config_object`) which may be arbitrary nested. The pipeline is executed by instantiating that config
 object, i.e. the config object is recursively processed by calling all values of keys `_target_` as functions with the
 remaining key value pairs as keyword arguments, see method `instantiate` in 
-[hydra.py](hydra_cached/execution/hydra.py) for further details and additional special keys. This functionality
+[hydra.py](hydra_cached/execution/hydra.py) for further details and additional special keys (like the `_cache_result_` flag). This functionality
 is provided by the [hydra package](https://hydra.cc/docs/intro/). However, the hydra instantiate method is slightly
 modified to allow for caching of intermediate results. By doing so, it is possible to reuse object definitions within
 one pipeline without the need to recalculate them. Per default, a simple 
