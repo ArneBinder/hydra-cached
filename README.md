@@ -5,12 +5,12 @@ This project allows executing processing [pipelines](#pipelines) defined in pyth
 
 ## Setup
 ```
-pip -r requirements.txt
+python -m pip install git+https://github.com/ArneBinder/hydra-cached
 ```
 
 ## Usage
 ```
-usage: hydra_cached/main.py [-h] [--config_object CONFIG_OBJECT] [--persist_cache]
+usage: instantiate [-h] [--config_object CONFIG_OBJECT] [--persist_cache]
                [--cache_dir CACHE_DIR] [--cache_verbose] [--display_config]
                [--exclude_persisting_targets EXCLUDE_PERSISTING_TARGETS]
                [--log_level LOG_LEVEL]
@@ -46,6 +46,8 @@ optional arguments:
   --log_level LOG_LEVEL, -l LOG_LEVEL
                         Log level for the console logger. default: INFO
 ```
+
+Yoiu can find a working example config in [this repo](https://github.com/ArneBinder/hydra-cached-example).
 
 
 ## Pipelines
