@@ -1,7 +1,11 @@
 # Hydra Cached
 Hydra instantiate, but cached!
 
-This project allows executing processing [pipelines](#pipelines) defined in python files. 
+This project allows executing processing [pipelines](#pipelines) defined in python 
+files and which should follow the 
+[Hydra instantiate API](https://hydra.cc/docs/advanced/instantiate_objects/overview). 
+However, the result of all executed targets is cached in memory (can be disabled per 
+subconfig) and optionally persisted to or loaded from the file system. 
 
 ## Setup
 ```
