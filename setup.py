@@ -48,6 +48,6 @@ setup(
     ],
     entry_points={"console_scripts": ["instantiate=hydra_cached.main:main"]},
     #include_package_data=True,
-    #python_requires=">=3.7.1",
+    python_requires=">=3.7.1",
     #zip_safe=False,
 )
