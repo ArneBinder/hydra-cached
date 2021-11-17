@@ -13,12 +13,6 @@ from setuptools import find_packages, setup
 #   X.YrcN  # Release Candidate
 #   X.Y     # Final release
 
-# version.py defines the VERSION and VERSION_SHORT variables.
-# We use exec here so we don't import allennlp whilst setting up.
-VERSION = {}  # type: ignore
-with open("allennlp/version.py", "r") as version_file:
-    exec(version_file.read(), VERSION)
-
 setup(
     name="hydra-cached",
     version="0.0a1",
@@ -32,11 +26,11 @@ setup(
         "Programming Language :: Python :: 3",
         #"Topic :: Scientific/Engineering :: Artificial Intelligence",
     ],
-    keywords="allennlp NLP deep learning machine reading",
-    url="https://github.com/allenai/allennlp",
-    author="Allen Institute for Artificial Intelligence",
-    author_email="allennlp@allenai.org",
-    license="Apache",
+    #keywords="NLP deep learning machine reading",
+    url="https://github.com/ArneBinder/hydra-cached",
+    author="Arne Binder",
+    author_email="arne.binder@dfki.de",
+    license="MIT",
     packages=find_packages(
         exclude=[
             "*.tests",
