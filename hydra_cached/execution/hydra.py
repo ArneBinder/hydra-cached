@@ -59,6 +59,8 @@ def instantiate(config: Any, *args: Any, cache: Optional[Union[Cache, str]] = No
                    _cache_result_: If a cache is available, add to it the result of the 
                                    construction. The config is used as key.
                                    True by default.
+                   _not_deterministic_: Overwrite the value of not_deterministic which is per default taken from the 
+                                        target callable.
     :param args: Optional positional parameters pass-through
     :param cache: A cache object that fallows the interface defined in Cache or the . Defaults to InMemoryCache.
     :param kwargs: Optional named parameters to override
@@ -182,14 +184,16 @@ def instantiate_node(
 
     elif OmegaConf.is_dict(node):
         infos = {}
-        exclude_keys = set({"_target_", "_convert_", "_recursive_", "_cache_result_", "_result_hash_"})
+        exclude_keys = set({"_target_", "_convert_", "_recursive_", "_cache_result_", "_result_hash_",
+                            "_not_deterministic_"})
         if _is_target(node):
             if cache is not None:
                 if node in cache:
                     return cache[node]
 
             target = _resolve_target(node.get(_Keys.TARGET))
-            target_info = InstantiatedNodeInfo.from_func(target, cache_result=node.get("_cache_result_", True))
+            target_info = InstantiatedNodeInfo.from_func(target, cache_result=node.get("_cache_result_", True),
+                                                         not_deterministic=node.get("_not_deterministic_", None))
             kwargs = {}
             for key, value in node.items():
                 if key not in exclude_keys:

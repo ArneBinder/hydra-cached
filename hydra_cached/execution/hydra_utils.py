@@ -38,8 +38,11 @@ class FuncInfo:
 
 @dataclass(frozen=True)
 class InstantiatedNodeInfo:
+    # This describes just the target callable of this node, not if any child / ancestor node is not deterministic!
+    # In the later case, deterministic_config would be _not_ None.
     not_deterministic: bool = False
     cache_result: bool = True
+    # This is only set, if this node depends (recursively) on any node that is not deterministic.
     deterministic_config: Optional[OmegaConf] = None
     time_target: Optional[timedelta] = None
 
@@ -80,8 +83,10 @@ class InstantiatedNodeInfo:
                                     not_deterministic=_not_deterministic)
 
     @staticmethod
-    def from_func_info(func_info: FuncInfo, **kwargs) -> InstantiatedNodeInfo:
-        return InstantiatedNodeInfo(not_deterministic=func_info.not_deterministic, **kwargs)
+    def from_func_info(func_info: FuncInfo, not_deterministic: Optional[bool] = None, **kwargs) -> InstantiatedNodeInfo:
+        if not_deterministic is None:
+            not_deterministic = func_info.not_deterministic
+        return InstantiatedNodeInfo(not_deterministic=not_deterministic, **kwargs)
 
     @staticmethod
     def from_func(func: Callable, **kwargs) -> InstantiatedNodeInfo:
